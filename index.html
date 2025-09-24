@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Counter App</title>
+  <!-- Bootstrap Latest -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(135deg, #74ebd5, #9face6);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .counter-box {
+        background: #fff;
+        width: 340px;
+        padding: 30px 20px;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0px 8px 25px rgba(0,0,0,0.25);
+        transition: 0.3s ease-in-out;
+    }
+
+    .counter-box:hover {
+        transform: scale(1.05);
+    }
+
+    .counter-title {
+        font-size: 1.9rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #061727;
+        font-family:serif;
+        font-style: italic;
+        font-variant: inherit;
+       
+    }
+
+    #ch {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-custom {
+        min-width: 90px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        #ch {
+            font-size: 3rem;
+        }
+        .counter-box {
+            width: 280px;
+        }
+    }
+
+    
+</style>
+
+<body>
+    <div class="main">
+        <div>
+            <div class="counter-box">
+                <div class="counter-title ">Counter Application</div>
+                <h1 id="ch">0</h1>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <button id="minusBtn" class="btn btn-outline-danger btn-lg btn-custom">-</button>
+                    <button id="plusBtn" class="btn btn-outline-success btn-lg btn-custom">+</button>
+                   <button id="resetBtn" class="btn btn-outline-info btn-lg btn-custom ">Reset</button>
+                </div>
+            
+    </div>
+
+    <script>
+        let i = parseInt(localStorage.getItem("counter")) || 0;
+        const display = document.getElementById("ch");
+        const plusBtn = document.getElementById("plusBtn");
+        const minusBtn = document.getElementById("minusBtn");
+        const resetBtn = document.getElementById("resetBtn");
+
+        function updateDisplay() {
+            display.textContent = i;
+            display.style.transform = "scale(1.2)";
+            setTimeout(() => display.style.transform = "scale(1)", 150);
+
+            if (i > 0) {
+                display.style.color = "green";
+            } else if (i < 0) {
+                display.style.color = "red";
+            } else {
+                display.style.color = "black";
+            }
+            localStorage.setItem("counter", i);
+        }
+
+        plusBtn.addEventListener("click", () => {
+            i++;
+            updateDisplay();
+        });
+
+        minusBtn.addEventListener("click", () => {
+            i--;  // negative bhi hoga
+            updateDisplay();
+        });
+
+        resetBtn.addEventListener("click", () => {
+            i = 0;
+            updateDisplay();
+        });
+
+        updateDisplay();
+    </script>
+</body>
+</html>
+
+
+
